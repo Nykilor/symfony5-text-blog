@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.username }} blog{% endblock %}
+
+{% block body %}
+<main class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h2>{{ user.username }}</h2>
+            </div>
+        </div>
+        {% if app.request.pathinfo == "/me" %}
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2">
+                        <a href="{{ path('text_entry') }}" class="btn btn-primary">Add blog entry</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if user.textEntries is empty %}
+            <hr>
+            <div class="row">
+                <p>It's empty here for now, user didn't post anything on his cool text blog.</p>
+            </div>
+        {% endif %}
+        {% for entry in user.textEntries %}
+            <hr>
+            <div class="row">
+                <p>{{ entry.content }}</p>
+                <time>{{ entry.creationDate|date("Y-m-d H:i:s") }}</time>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

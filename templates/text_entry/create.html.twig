@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TextEntryController!{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        label {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Create text entry</h1>
+            {{ form_start(createForm) }}
+            {{ form_row(createForm.content) }}
+
+            <button type="submit" class="btn btn-primary form-control">Add text entry</button>
+            {{ form_end(createForm) }}
+        </div>
+    </div>
+
+{% endblock %}

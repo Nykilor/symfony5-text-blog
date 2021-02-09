@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+    <main class="mt-5">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <h1>TEXT BLOG</h1>
+                    <p>Join the smallest non-existing community of text bloggers on a non-existing platform full of people like You!</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="col">
+                    <div class="d-grid gap-2">
+                        <a href="{{ path('current_user_profile') }}" class="btn btn-primary">My profile</a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col">
+                    <div class="d-grid gap-2">
+                        <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-info">Register now!</a>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h3>These people joined us check their text-blog-space to learn what they want to share</h3>
+                </div>
+            </div>
+            <div class="row">
+                {% for user in users %}
+                    <div class="col-2 mt-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <a href="{{ path('user_profile', {username: user.username}) }}"><h5 class="card-title">{{ user.username }}</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
